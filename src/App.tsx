@@ -1,11 +1,13 @@
 import * as React from 'react';
 import './assets/stylesheets/index.css';
-import { AtButton } from './components/button/at-button.component';
+import { Link } from 'react-router-dom';
+import { RouteWithSubRoutes } from './index';
 
 class App extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props);
+        console.log(props);
         this.state = {type: 'default', fuck: 'ss'};
     }
 
@@ -19,21 +21,10 @@ class App extends React.Component<any, any> {
     public render() {
         return (
             <div className='App'>
-                {this.state.fuck}
-                <AtButton onClick={this.handleClick} atType={this.state.type}
-                          atLoading={this.state.atLoading}>
-                    我是傻逼
-                </AtButton>
-                <AtButton onClick={this.handleClick} disabled atType={this.state.type} atLoading/>
-                <AtButton onClick={this.handleClick} atType={'error'} atLoading atHollow/>
-                <AtButton onClick={this.handleClick} atType={this.state.type} atIcon={'icon-search'} atHollow/>
-                <AtButton onClick={this.handleClick} atType={this.state.type} atIcon={'icon-search'} atHollow/>
-                <AtButton onClick={this.handleClick} atType={this.state.type} atIcon={'icon-search'} atSize={'large'}
-                          atHollow/>;
-                <AtButton onClick={this.handleClick} atType={this.state.type} atIcon={'icon-search'} atSize={'small'}
-                          atHollow/>;
-                <AtButton onClick={this.handleClick} atType={this.state.type} atIcon={'icon-search'} atSize={'smaller'}
-                          atHollow/>;
+                <Link to={'/components/docs'}>123123</Link>
+                {this.props.routes.map((route: any, i: number) => (
+                    <RouteWithSubRoutes key={i} {...route} />
+                ))}
             </div>
         )
             ;
