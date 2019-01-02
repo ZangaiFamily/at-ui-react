@@ -1,11 +1,11 @@
 const path = require('path');
-
+const TerserPlugin = require('terser-webpack-plugin')
 module.exports = {
     mode: "production",
     entry: path.join(__dirname, "../src/components/index.ts"),
     output: {
-        filename: "../publish/[name].js",
-        libraryTarget:'umd'
+        filename: "../publish/bundle/at-react.umd.js",
+        libraryTarget: 'umd'
     },
     resolve: {
         extensions: [".ts", ".tsx", ".js"]
@@ -30,5 +30,8 @@ module.exports = {
             amd: "ReactDOM",
             root: "ReactDOM"
         }
+    },
+    optimization: {
+        minimizer: [new TerserPlugin()],
     },
 };
