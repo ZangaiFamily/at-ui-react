@@ -1,1 +1,3 @@
-export * from './public-api';
+import { AtInput } from './at-input.componnet';
+
+export default AtInput;

@@ -6,6 +6,7 @@
     "module": "es2015",
     "jsx": "react",
     "sourceMap": false,
+    "alwaysStrict": true,
     "inlineSources": false,
     "moduleResolution": "node",
     "importHelpers": true,

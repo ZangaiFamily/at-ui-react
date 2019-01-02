@@ -28,12 +28,11 @@ export type NativeButtonProps = {
 export class AtButton extends React.Component<IButtonProps> {
 
     static defaultProps: IButtonProps = {
-        atType: 'primary',
+        atType: 'default',
     };
 
     constructor(props: IButtonProps) {
         super(props);
-        console.log(this);
     }
 
     public isIcon() {
@@ -77,3 +76,4 @@ export class AtButton extends React.Component<IButtonProps> {
     }
 
 }
+

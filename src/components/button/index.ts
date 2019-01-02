@@ -1,1 +1,3 @@
-export * from './public-api';
+import { AtButton } from './at-button.component';
+
+export default AtButton;
