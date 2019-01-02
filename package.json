@@ -7,8 +7,8 @@
     "react-dom": "^16.7.0"
   },
   "scripts": {
-    "dev": "npx webpack-dev-server --config build/webpack.config.js --mode development --open --hot",
-    "build": "npx webpack --config build/webpack.config.js"
+    "dev": "npx webpack-dev-server --config script/webpack.config.js --mode development --open --hot",
+    "build": "npx webpack --config script/webpack.config.js"
   },
   "devDependencies": {
     "@types/jest": "^23.3.10",
