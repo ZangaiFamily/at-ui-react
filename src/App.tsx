@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './assets/stylesheets/index.css';
-import { AtButton } from './componnets/button/at-button.component';
+import { AtButton } from './components/button/at-button.component';
 
 class App extends React.Component<any, any> {
 
