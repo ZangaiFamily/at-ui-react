@@ -7,6 +7,7 @@ import { ChildrenWithProp } from '../core/common';
 export interface IMenuProps {
     theme?: string
     atType?: 'horizontal' | 'inline' | 'vertical'
+    style?: any
 }
 
 export class AtMenu extends React.Component<IMenuProps, any> {
@@ -29,7 +30,7 @@ export class AtMenu extends React.Component<IMenuProps, any> {
             [`at-menu--${this.props.theme}`]: true,
         });
         const {atType, theme} = this.props;
-        return (<ul className={classes}>
+        return (<ul className={classes} style={this.props.style}>
             {ChildrenWithProp(this, {atType, theme})}
         </ul>);
     }

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { buildClassName } from '../core/css-builder';
+import { ISubMenu } from './sub-menu.component';
 
 
-export interface IMenuItemProps {
+export interface IMenuItemProps extends ISubMenu {
     active?: boolean
 }
 
@@ -10,6 +11,7 @@ export class AtMenuItemComponent extends React.Component<IMenuItemProps, any> {
 
     static defaultProps: IMenuItemProps = {
         active: false,
+        level: 0,
     };
 
     constructor(props: IMenuItemProps) {
@@ -17,12 +19,17 @@ export class AtMenuItemComponent extends React.Component<IMenuItemProps, any> {
     }
 
     public render() {
+        let paddingLeft = 0;
+        if (this.props.atType === 'inline') {
+            paddingLeft = (this.props.level + 1) * 23;
+        }
+
         const classes = buildClassName({
             'at-menu__item': true,
             'at-menu__item--active': this.props.active,
         });
         return (
-            <li className={classes}>
+            <li className={classes} style={{paddingLeft: paddingLeft + 'px'}}>
                 <div className="at-menu__item-link">{this.props.children}</div>
             </li>
         );

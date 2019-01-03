@@ -1,6 +1,5 @@
 import * as React from 'react';
 import './assets/stylesheets/index.css';
-import { Link } from 'react-router-dom';
 import { RouteWithSubRoutes } from './index';
 
 class App extends React.Component<any, any> {
@@ -21,7 +20,6 @@ class App extends React.Component<any, any> {
     public render() {
         return (
             <div className='App'>
-                <Link to={'/components/docs'}>123123</Link>
                 {this.props.routes.map((route: any, i: number) => (
                     <RouteWithSubRoutes key={i} {...route} />
                 ))}
