@@ -4,8 +4,11 @@ import { Link } from 'react-router-dom';
 import { ComponentsRoutes } from '../routes';
 import { RouteWithSubRoutes } from '../index';
 
-export class DocComponent extends React.Component {
+export class DocComponent extends React.Component<any, any> {
+
     public render() {
+        const {pathname} = this.props.location;
+
         return [<div key={'left'} className={'col-sm-24 col-md-6 col-lg-4 at-sidebar'}>
             <AtMenu style={{width: '280px'}} atType={'inline'}>
                 <AtMenu.MenuItem>
@@ -18,38 +21,11 @@ export class DocComponent extends React.Component {
                     快速上手
                 </AtMenu.MenuItem>
                 <AtMenu.SubMenu open title={'基础组件'}>
-                    <ul>
-                        <AtMenu.MenuItem active>
-                            <Link to={'/components/menu'}>
-                                Menu
-                            </Link>
-                        </AtMenu.MenuItem>
-                        <AtMenu.MenuItem>
-                            4
-                        </AtMenu.MenuItem>
-                        <AtMenu.MenuItem>
-                            5
-                        </AtMenu.MenuItem>
-                        <AtMenu.MenuItem>
-                            6
-                        </AtMenu.MenuItem>
-                        <AtMenu.SubMenu title={'表单组件'}>
-                            <ul>
-                                <AtMenu.MenuItem>
-                                    3
-                                </AtMenu.MenuItem>
-                                <AtMenu.MenuItem>
-                                    4
-                                </AtMenu.MenuItem>
-                                <AtMenu.MenuItem>
-                                    5
-                                </AtMenu.MenuItem>
-                                <AtMenu.MenuItem>
-                                    6
-                                </AtMenu.MenuItem>
-                            </ul>
-                        </AtMenu.SubMenu>
-                    </ul>
+                    {ComponentsRoutes.map((route, index) =>
+                        <AtMenu.MenuItem key={index} active={pathname === route.path}>
+                            <Link to={route.path}>{route.name}</Link>
+                        </AtMenu.MenuItem>,
+                    )}
                 </AtMenu.SubMenu>
             </AtMenu>
         </div>,

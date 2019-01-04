@@ -6,7 +6,6 @@ class App extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props);
-        console.log(props);
         this.state = {type: 'default', fuck: 'ss'};
     }
 
@@ -16,6 +15,10 @@ class App extends React.Component<any, any> {
             atLoading: true,
         });
     };
+
+    componentDidMount() {
+        this.props.history.push('/components');
+    }
 
     public render() {
         return (
