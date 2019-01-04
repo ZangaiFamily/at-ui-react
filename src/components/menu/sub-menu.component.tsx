@@ -6,29 +6,31 @@ import Transition from 'react-transition-group/Transition';
 import {
     DropDownDefaultStyle,
     DropDownTransitionStyles,
-    ExpandDefaultStyle,
-    ExpandTransitionStyles
 } from '../core/animations';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { auditTime } from 'rxjs/operators';
 import { ChildrenWithProp } from '../core/common';
+import AtAnimationHeight from '../animation';
 
 export interface ISubMenu extends IMenuProps {
     title?: any
-    level: number
+    level: number,
+    open?: boolean
 }
 
 export class AtSubMenuComponent extends React.Component<ISubMenu, any> {
     static defaultProps: ISubMenu = {
         level: 0,
+        open: false,
     };
     $mouseSubject = new Subject();
+    $mouseSub = Subscription.EMPTY;
 
     constructor(props: ISubMenu) {
         super(props);
         this.state = {
             titleRef: null,
-            open: false,
+            open: props.open,
             animation: false,
         };
     }
@@ -41,18 +43,20 @@ export class AtSubMenuComponent extends React.Component<ISubMenu, any> {
         });
     }
 
+    componentWillUnmount() {
+        this.$mouseSub.unsubscribe();
+    }
+
     setTitle = (ref: HTMLDivElement | null) => {
         this.setState({
             titleRef: ref,
         });
     };
     handleClick = (event: any) => {
-        event.preventDefault();
-        if (event.target === this.state.titleRef) {
-            const open = !this.state.open;
-            console.log('open');
-            this.$mouseSubject.next(open);
-        }
+        const open = !this.state.open;
+        this.setState({
+            open: open,
+        });
     };
 
     handleEnter = (event: any) => {
@@ -89,6 +93,8 @@ export class AtSubMenuComponent extends React.Component<ISubMenu, any> {
 
         const position = (this.props.level === 0 && this.props.atType === 'horizontal') ? 'bottom' : 'right';
 
+        const titlePadding = this.props.atType === 'inline' ? {paddingLeft: (this.props.level + 1) * 23} : {};
+
         const common = <Transition in={this.state.open} timeout={15}>
             {(state: any) => (
                 <ConnectedOverlay
@@ -113,29 +119,29 @@ export class AtSubMenuComponent extends React.Component<ISubMenu, any> {
                 </ConnectedOverlay>
             )}
         </Transition>;
-        const inline = <Transition in={this.state.open} timeout={10}>
-            {(state: any) => {
-                const style = {...ExpandDefaultStyle, ...ExpandTransitionStyles[state]};
-                return (
-                    <ul className="at-sub-dropdown-menu"
-                        style={style}>
-                        {ChildrenWithProp(this.props.children, {
-                            level: this.props.level + 1,
-                            atType: this.props.atType,
-                            theme: this.props.theme,
-                        })}
-                    </ul>
-                );
-            }}
-        </Transition>;
+        const inline =
+            <AtAnimationHeight
+                duration={150}
+                height={this.state.open ? 'auto' : 0}>
+                <ul className="at-sub-dropdown-menu">
+                    {ChildrenWithProp(this.props.children, {
+                        level: this.props.level + 1,
+                        atType: this.props.atType,
+                        theme: this.props.theme,
+                    })}
+                </ul>
+            </AtAnimationHeight>;
 
         return (<li className={classes}>
                 <div onClick={this.handleClick} onMouseEnter={this.handleEnter} onMouseLeave={this.handleLeave}
-                     ref={this.setTitle} className={titleClasses}>
+                     ref={this.setTitle} className={titleClasses} style={{...titlePadding}}>
                     {this.props.title}
-                    {((this.props.level > 0 && this.props.atType === 'horizontal') || this.props.atType === 'vertical') ?
+                    {((this.props.level > 0 && this.props.atType === 'horizontal') || (this.props.atType === 'vertical' && this.props.children)) ?
                         <i className="icon icon-chevron-right right-arrow"/> : null}
 
+                    {(this.props.atType === 'inline' && this.props.children) ?
+                        <i className={`icon icon-chevron-up ${this.state.open ? 'chevron_open' : ''}`}/> : null
+                    }
                 </div>
                 {this.props.atType === 'inline' ? inline : common}
             </li>

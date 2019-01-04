@@ -1,5 +1,6 @@
 import { DocComponent } from './docs';
 import App from './App';
+import { MenuDocComponent } from './docs/menu-doc/menu-doc.component';
 
 export const Routes = [{
     path: '',
@@ -9,3 +10,10 @@ export const Routes = [{
         component: DocComponent,
     }],
 }];
+
+export const ComponentsRoutes = [
+    {
+        path: '/components/menu',
+        component: MenuDocComponent,
+    },
+];

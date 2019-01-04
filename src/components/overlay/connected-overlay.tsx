@@ -28,7 +28,6 @@ export class ConnectedOverlay extends React.Component<IConnectedOverlayProp, any
 
     componentDidMount() {
         window.document.addEventListener('scroll', () => {
-            console.log('scroll');
             this.calculateOriginPosition(this.props.origin);
         });
     }

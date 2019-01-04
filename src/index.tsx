@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 import { Routes } from './routes';
 
 export function RouteWithSubRoutes(route: { [x: string]: any }) {
@@ -43,8 +43,8 @@ export function Footer() {
             <div className="container">
                 <div className="footer-logo"/>
                 <div className="footer-desc" style={{float: 'left'}}>
-                    <div className="footer-copyright">© 2017 Created by <a href="//ng-at.thunderjava.com"
-                                                                           target="_blank">Icepoint1999</a></div>
+                    <div className="footer-copyright">© 2019 Created by <a href="//ng-at.thunderjava.com"
+                                                                           target="_blank">ZangaiFamily</a></div>
                 </div>
                 <div style={{float: 'right'}}>
                     <a href="https://github.com/icepoint0/at-angular">
@@ -62,9 +62,7 @@ class Layout extends React.Component {
     public render() {
         return (<div className={'wrapper'}>
             <Header/>
-            <div className={'at-container row at-row'} style={{margin: '40px auto'}}>
-                {this.props.children}
-            </div>
+            {this.props.children}
             <Footer/>
         </div>);
     }
@@ -72,13 +70,13 @@ class Layout extends React.Component {
 
 const Root = () => (
     <Layout>
-        <BrowserRouter>
+        <HashRouter>
             <div>
                 {Routes.map((route, i) => (
                     <RouteWithSubRoutes key={i} {...route} />
                 ))}
             </div>
-        </BrowserRouter>
+        </HashRouter>
     </Layout>
 
 );

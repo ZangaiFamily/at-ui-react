@@ -19,9 +19,11 @@ export class AtMenuItemComponent extends React.Component<IMenuItemProps, any> {
     }
 
     public render() {
-        let paddingLeft = 0;
+        let paddingLeft = {};
         if (this.props.atType === 'inline') {
-            paddingLeft = (this.props.level + 1) * 23;
+            paddingLeft = {
+                paddingLeft: (this.props.level + 1) * 23,
+            };
         }
 
         const classes = buildClassName({
@@ -29,7 +31,7 @@ export class AtMenuItemComponent extends React.Component<IMenuItemProps, any> {
             'at-menu__item--active': this.props.active,
         });
         return (
-            <li className={classes} style={{paddingLeft: paddingLeft + 'px'}}>
+            <li className={classes} style={paddingLeft}>
                 <div className="at-menu__item-link">{this.props.children}</div>
             </li>
         );

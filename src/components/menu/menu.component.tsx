@@ -29,9 +29,9 @@ export class AtMenu extends React.Component<IMenuProps, any> {
             [`at-menu--${this.props.atType}`]: true,
             [`at-menu--${this.props.theme}`]: true,
         });
-        const {atType, theme} = this.props;
+        const {children, ...prop} = this.props;
         return (<ul className={classes} style={this.props.style}>
-            {ChildrenWithProp(this, {atType, theme})}
+            {ChildrenWithProp(this.props.children, prop)}
         </ul>);
     }
 }

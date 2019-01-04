@@ -9,7 +9,7 @@ export const DropDownTransitionStyles: any = {
 };
 
 export const ExpandDefaultStyle: any = {
-    transition: `height 150ms ease-in`,
+    transition: `height 120ms ease-in`,
     opacity: 0,
     height: 0,
     overflow: 'hidden',
@@ -17,5 +17,5 @@ export const ExpandDefaultStyle: any = {
 
 export const ExpandTransitionStyles: any = {
     entering: {opacity: 0, overflow: 'hidden'},
-    entered: {opacity: 1, height: 'auto'},
+    entered: {opacity: 1, height: 'calc(auto+1px)'},
 };

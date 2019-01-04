@@ -1,5 +1,8 @@
 import * as React from 'react';
 
-export const ChildrenWithProp = (component: any, props: any) => React.Children.map(component.props.children, (child, index) => {
+export const ChildrenWithProp = (children: any, props: any) => children ? React.Children.map(children, (child, index) => {
+    if (typeof children.type === 'string') {
+        props = {};
+    }
     return React.cloneElement(child, {index, ...props});
-});
+}) : null;

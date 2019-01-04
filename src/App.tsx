@@ -19,7 +19,7 @@ class App extends React.Component<any, any> {
 
     public render() {
         return (
-            <div className='App'>
+            <div className='at-container row at-row' style={{margin: '40px auto'}}>
                 {this.props.routes.map((route: any, i: number) => (
                     <RouteWithSubRoutes key={i} {...route} />
                 ))}
