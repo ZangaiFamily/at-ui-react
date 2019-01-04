@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { buildClassName as cx } from './core/css-builder';
 
 const ANIMATION_STATE_CLASSES = {
@@ -89,7 +89,7 @@ export interface IAnimationHeight {
     style?: any;
 }
 
-export class AtAnimationHeight extends React.Component<IAnimationHeight, any> {
+export class AtAnimationHeight extends React.Component<any, any> {
     static defaultProps = {
         animateOpacity: false,
         animationStateClasses: ANIMATION_STATE_CLASSES,
